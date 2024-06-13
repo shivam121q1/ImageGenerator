@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import axios from "axios"
 
 const history = () => {
   const { token } = useSelector((state) => state.auth);
+  const [history,setHistory] = useState ([])
 
   const fetchPhotos = async () => {
     // e.preventDefault();
@@ -19,12 +20,7 @@ const history = () => {
         withCredentials: true // If your backend requires credentials
       });
       console.log(response);
-      // if (response.data && response.data.data.results) {
-      //   setImages(response.data.data.results);
-      //   console.log(images);
-      // } else {
-      //   throw new Error('Invalid response structure');
-      // }
+        
 
     } catch (error) {
       // setErrorMsg('Error fetching photos');
@@ -37,7 +33,7 @@ const history = () => {
   useEffect(()=>{
     console.log("effect")
     fetchPhotos();
-  })
+  },[])
 
   return (
     <div className='text-white'>
